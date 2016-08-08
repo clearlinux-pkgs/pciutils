@@ -1,6 +1,6 @@
 Name:           pciutils
 Version:        3.5.1
-Release:        17
+Release:        18
 License:        GPL-2.0+
 Summary:        PCI utilities
 Url:            http://atrey.karlin.mff.cuni.cz/~mj/pciutils.shtml
@@ -49,52 +49,53 @@ PCI utilities.
 %build
 make %{?_smp_mflags} \
 	OPT="%{optflags} -Wall" \
-	INCDIR=%{_includedir} \
+	INCDIR=/usr/include \
 	PREFIX=%{_prefix} \
 	LIBDIR=/usr/lib \
-	SBINDIR=%{_sbindir} \
+	SBINDIR=/usr/sbin \
 	STRIP="" \
 	SHARED=yes \
-	IDSDIR=%{_datadir}/hwdata
+	IDSDIR=/usr/share/hwdata
 
 %install
 make PREFIX=%{buildroot}/%{_prefix} \
-	INCDIR=%{buildroot}/%{_includedir} \
-	SBINDIR=%{buildroot}/%{_sbindir} \
+	INCDIR=%{buildroot}/usr/include \
+	SBINDIR=%{buildroot}/usr/bin \
+	BINDIR=%{buildroot}/usr/bin \
 	ROOT=%{buildroot}/ \
-	MANDIR=%{buildroot}/%{_mandir} \
+	MANDIR=%{buildroot}//usr/share/man \
 	STRIP="" \
 	SHARED=yes \
-	LIBDIR=%{buildroot}%{_libdir} \
-	IDSDIR=%{buildroot}/%{_datadir}/hwdata \
+	LIBDIR=%{buildroot}/usr/lib64 \
+	IDSDIR=%{buildroot}//usr/share/hwdata \
 	install install-lib
 
-install -d %{buildroot}/%{_bindir}
+install -d %{buildroot}//usr/bin
 
-chmod 755 %{buildroot}%{_libdir}/libpci.so.3.*
+chmod 755 %{buildroot}/usr/lib64/libpci.so.3.*
 
 %files
-%{_sbindir}/setpci
-%{_sbindir}/update-pciids
-%{_bindir}/lspci
+/usr/bin/setpci
+/usr/bin/update-pciids
+/usr/bin/lspci
 
 %files data
-%exclude %{_datadir}/hwdata/pci.ids.gz
+%exclude /usr/share/hwdata/pci.ids.gz
 
 %files lib
-%{_libdir}/libpci.so.*
+/usr/lib64/libpci.so.*
 
 %files dev
-%{_includedir}/pci/config.h
-%{_includedir}/pci/header.h
-%{_includedir}/pci/pci.h
-%{_includedir}/pci/types.h
-%{_libdir}/libpci.so
-%{_libdir}/pkgconfig/libpci.pc
+/usr/include/pci/config.h
+/usr/include/pci/header.h
+/usr/include/pci/pci.h
+/usr/include/pci/types.h
+/usr/lib64/libpci.so
+/usr/lib64/pkgconfig/libpci.pc
 
 %files doc
-%{_mandir}/man8/lspci.8
-%{_mandir}/man8/update-pciids.8
-%{_mandir}/man8/setpci.8
-%{_mandir}/man7/pcilib.7
+/usr/share/man/man8/lspci.8
+/usr/share/man/man8/update-pciids.8
+/usr/share/man/man8/setpci.8
+/usr/share/man/man7/pcilib.7
 
