@@ -1,6 +1,6 @@
 Name:           pciutils
 Version:        3.5.4
-Release:        19
+Release:        20
 License:        GPL-2.0+
 Summary:        PCI utilities
 Url:            http://atrey.karlin.mff.cuni.cz/~mj/pciutils.shtml
