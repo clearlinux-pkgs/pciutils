@@ -1,11 +1,11 @@
 Name:           pciutils
-Version:        3.5.6
+Version:        3.6.0
 Release:        22
 License:        GPL-2.0+
 Summary:        PCI utilities
 Url:            http://atrey.karlin.mff.cuni.cz/~mj/pciutils.shtml
 Group:          console/utils
-Source0:        https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.6.tar.xz
+Source0:        https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.6.0.tar.xz
 BuildRequires:  pkgconfig(libkmod)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  systemd
