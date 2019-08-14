@@ -1,0 +1,57 @@
+From 7e8e80dfe1b036e656b988a59159f9ee57a20684 Mon Sep 17 00:00:00 2001
+From: Auke Kok <auke-jan.h.kok@intel.com>
+Date: Wed, 14 Aug 2019 15:16:07 -0700
+Subject: [PATCH] Makefile build fixes.
+
+---
+ Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 8c7edb7..ef003cd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -19,7 +19,7 @@ ZLIB=
+ DNS=
+ 
+ # Build libpci as a shared library (yes/no; or local for testing; requires GCC)
+-SHARED=no
++SHARED=yes
+ 
+ # Use libkmod to resolve kernel modules on Linux (yes/no, default: detect)
+ LIBKMOD=
+@@ -32,19 +32,19 @@ HWDB=
+ ABI_VERSION=.3
+ 
+ # Installation directories
+-PREFIX=/usr/local
++PREFIX=/usr
+ SBINDIR=$(PREFIX)/sbin
+ SHAREDIR=$(PREFIX)/share
+ IDSDIR=$(SHAREDIR)
+ MANDIR:=$(shell if [ -d $(PREFIX)/share/man ] ; then echo $(PREFIX)/share/man ; else echo $(PREFIX)/man ; fi)
+ INCDIR=$(PREFIX)/include
+-LIBDIR=$(PREFIX)/lib
++LIBDIR=$(PREFIX)/lib64
+ PKGCFDIR=$(LIBDIR)/pkgconfig
+ 
+ # Commands
+ INSTALL=install
+ DIRINSTALL=install -d
+-STRIP=-s
++STRIP=
+ CC=$(CROSS_COMPILE)gcc
+ AR=$(CROSS_COMPILE)ar
+ RANLIB=$(CROSS_COMPILE)ranlib
+@@ -108,7 +108,7 @@ clean:
+ 
+ distclean: clean
+ 
+-install: all
++install: all install-lib
+ # -c is ignored on Linux, but required on FreeBSD
+ 	$(DIRINSTALL) -m 755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(IDSDIR) $(DESTDIR)$(MANDIR)/man8 $(DESTDIR)$(MANDIR)/man7
+ 	$(INSTALL) -c -m 755 $(STRIP) lspci setpci $(DESTDIR)$(SBINDIR)
+-- 
+2.22.1
+
