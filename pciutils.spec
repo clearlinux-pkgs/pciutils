@@ -4,7 +4,7 @@
 #
 Name     : pciutils
 Version  : 3.6.2
-Release  : 33
+Release  : 34
 URL      : https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.6.2.tar.xz
 Source0  : https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.6.2.tar.xz
 Summary  : The PCI Utilities
