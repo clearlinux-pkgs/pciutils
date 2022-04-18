@@ -6,6 +6,7 @@ libpci.so.3:LIBPCI_3.4
 libpci.so.3:LIBPCI_3.5
 libpci.so.3:LIBPCI_3.6
 libpci.so.3:LIBPCI_3.7
+libpci.so.3:LIBPCI_3.8
 libpci.so.3:pci_alloc
 libpci.so.3:pci_cleanup
 libpci.so.3:pci_fill_info
