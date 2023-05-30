@@ -5,7 +5,7 @@
 #
 Name     : pciutils
 Version  : 3.10.0
-Release  : 43
+Release  : 44
 URL      : https://mirrors.kernel.org/pub/software/utils/pciutils/pciutils-3.10.0.tar.xz
 Source0  : https://mirrors.kernel.org/pub/software/utils/pciutils/pciutils-3.10.0.tar.xz
 Summary  : The PCI Utilities
@@ -98,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685460903
+export SOURCE_DATE_EPOCH=1685461839
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -119,7 +119,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1685460903
+export SOURCE_DATE_EPOCH=1685461839
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pciutils
 cp %{_builddir}/pciutils-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pciutils/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
@@ -129,6 +129,7 @@ popd
 %make_install
 ## install_append content
 %make_install install-lib
+chmod a+x %{buildroot}*/usr/lib64/*
 ## install_append end
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 

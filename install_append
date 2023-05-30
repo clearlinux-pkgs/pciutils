@@ -1,1 +1,2 @@
 %make_install install-lib
+chmod a+x %{buildroot}*/usr/lib64/*
