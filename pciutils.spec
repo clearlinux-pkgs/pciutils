@@ -5,7 +5,7 @@
 #
 Name     : pciutils
 Version  : 3.10.0
-Release  : 41
+Release  : 43
 URL      : https://mirrors.kernel.org/pub/software/utils/pciutils/pciutils-3.10.0.tar.xz
 Source0  : https://mirrors.kernel.org/pub/software/utils/pciutils/pciutils-3.10.0.tar.xz
 Summary  : The PCI Utilities
@@ -44,6 +44,19 @@ Group: Data
 
 %description data
 data components for the pciutils package.
+
+
+%package dev
+Summary: dev components for the pciutils package.
+Group: Development
+Requires: pciutils-lib = %{version}-%{release}
+Requires: pciutils-bin = %{version}-%{release}
+Requires: pciutils-data = %{version}-%{release}
+Provides: pciutils-devel = %{version}-%{release}
+Requires: pciutils = %{version}-%{release}
+
+%description dev
+dev components for the pciutils package.
 
 
 %package lib
@@ -85,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685460431
+export SOURCE_DATE_EPOCH=1685460903
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -106,7 +119,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1685460431
+export SOURCE_DATE_EPOCH=1685460903
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pciutils
 cp %{_builddir}/pciutils-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pciutils/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
@@ -114,6 +127,9 @@ pushd ../buildavx2/
 %make_install_v3
 popd
 %make_install
+## install_append content
+%make_install install-lib
+## install_append end
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
@@ -130,6 +146,15 @@ popd
 %files data
 %defattr(-,root,root,-)
 /usr/share/pci.ids.gz
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/pci/config.h
+/usr/include/pci/header.h
+/usr/include/pci/pci.h
+/usr/include/pci/types.h
+/usr/lib64/libpci.so
+/usr/lib64/pkgconfig/libpci.pc
 
 %files lib
 %defattr(-,root,root,-)
