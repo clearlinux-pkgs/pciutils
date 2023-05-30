@@ -1,17 +1,6 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Auke Kok <auke-jan.h.kok@intel.com>
-Date: Wed, 14 Aug 2019 15:16:07 -0700
-Subject: [PATCH] Makefile build fixes.
-
----
- Makefile | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/Makefile b/Makefile
-index 9319bb4..7c4afea 100644
---- a/Makefile
-+++ b/Makefile
-@@ -19,7 +19,7 @@ ZLIB=
+--- pciutils-3.10.0/Makefile~	2023-05-01 12:59:54.000000000 +0000
++++ pciutils-3.10.0/Makefile	2023-05-30 15:26:02.030666362 +0000
+@@ -19,7 +19,7 @@
  DNS=
  
  # Build libpci as a shared library (yes/no; or local for testing; requires GCC)
@@ -20,8 +9,8 @@ index 9319bb4..7c4afea 100644
  
  # Use libkmod to resolve kernel modules on Linux (yes/no, default: detect)
  LIBKMOD=
-@@ -32,20 +32,20 @@ HWDB=
- ABI_VERSION=.3
+@@ -32,14 +32,14 @@
+ ABI_VERSION=3
  
  # Installation directories
 -PREFIX=/usr/local
@@ -37,19 +26,12 @@ index 9319bb4..7c4afea 100644
  PKGCFDIR=$(LIBDIR)/pkgconfig
  
  # Commands
- INSTALL=install
- DIRINSTALL=install -d
--STRIP=-s
-+STRIP=
- ifdef CROSS_COMPILE
+@@ -49,7 +49,7 @@
+ STRIP=--strip-program $(CROSS_COMPILE)-strip
  CC=$(CROSS_COMPILE)gcc
  else
-@@ -128,7 +128,7 @@ clean:
- 
- distclean: clean
- 
--install: all
-+install: all install-lib
- # -c is ignored on Linux, but required on FreeBSD
- 	$(DIRINSTALL) -m 755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(IDSDIR) $(DESTDIR)$(MANDIR)/man8 $(DESTDIR)$(MANDIR)/man7 $(DESTDIR)/$(MANDIR)/man5
- 	$(INSTALL) -c -m 755 $(STRIP) lspci$(EXEEXT) $(DESTDIR)$(LSPCIDIR)
+-STRIP=-s
++STRIP=
+ CC=cc
+ endif
+ AR=$(CROSS_COMPILE)ar
